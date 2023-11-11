@@ -1,24 +1,25 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Install Package:           'Cmd + Shift + B'
-#   Check Package:             'Cmd + Shift + E'
-#   Test Package:              'Cmd + Shift + T'
-
-howto <- function(do) {
+#' @export
+howto <- function(do, call_api = call_openai) {
   key <- get_secret_or_return("openai-key")
   model <- get_secret_or_return("openai-model")
 
+  req <- ai_completion_request(do, model)
+  res <- call_api(req$endpoint, key, req$json_body)
+
+  code <- parse_response_message(res)
+
+  cat(paste0(code, "\n"))
+  invisible(code)
+}
+
+parse_response_message <- function(res) {
+  res_obj <- rjson::fromJSON(rawToChar(res$body))
+  res_obj$choices[[1]]$message$content
+}
+
+ai_completion_request <- function(do, model) {
   endpoint <- "https://api.openai.com/v1/chat/completions"
-  auth <- paste("Bearer", key)
+
   messages <- list(
     list(role = "system", content = paste(
       "I want you to act as an R programming expert.",
@@ -28,10 +29,14 @@ howto <- function(do) {
   )
 
   json_body <- rjson::toJSON(list(
-    model = "gpt-4-1106-preview",
+    model = model,
     messages = messages
   ))
 
+  list(endpoint = endpoint, json_body = json_body)
+}
+
+call_openai <- function(endpoint, key, json_body) {
   res = httr2::request(endpoint) |>
     httr2::req_auth_bearer_token(key) |>
     httr2::req_headers("Content-Type" = "application/json") |>
@@ -39,11 +44,6 @@ howto <- function(do) {
     # httr2::req_error(is_error = function(resp) FALSE) |>
     httr2::req_perform()
     # httr2::req_dry_run()
-
-  res_obj <- rjson::fromJSON(rawToChar(res$body))
-  code <- res_obj$choices[[1]]$message$content
-  cat(paste0(code))
-  invisible(code)
 }
 
 result <- function(success = TRUE, status = "ok", message = "done") {
