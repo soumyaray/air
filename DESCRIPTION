@@ -13,3 +13,7 @@ Imports:
     httr2,
     keyring,
     rjson
+Suggests: 
+    httptest,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
