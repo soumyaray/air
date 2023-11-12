@@ -15,3 +15,14 @@ validated_credentials_or_stop <- function() {
   class(creds) <- c("credentials", class(creds))
   creds
 }
+
+api_answer_or_stop <- function(input, creds, context, call_api = call_openai) {
+  req <- ai_completion_request(input, creds$model, context)
+  res <- call_api(req$endpoint, creds$key, req$json_body)
+
+  if (failure(res)) {
+    stop(value(res))
+  }
+
+  parse_response_message(value(res))
+}

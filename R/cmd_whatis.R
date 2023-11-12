@@ -20,14 +20,7 @@ whatis <- function(this, call_api = call_openai) {
     "and finish with a simple example with its output, if possible.",
     "Do not overexplain or write too much.")
 
-  req <- ai_completion_request(this, creds$model, context)
-  res <- call_api(req$endpoint, creds$key, req$json_body)
-
-  if (failure(res)) {
-    stop(value(res))
-  }
-
-  explanation <- parse_response_message(value(res))
+  explanation <- api_answer_or_stop(this, creds, context, call_api)
 
   message(paste0(explanation, "\n"))
   invisible(explanation)

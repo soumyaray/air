@@ -18,14 +18,7 @@ howto <- function(do, call_api = call_openai) {
     "I want you to answer only with code, without triple backtics.",
     "Do not write explanations.")
 
-  req <- ai_completion_request(do, creds$model, context)
-  res <- call_api(req$endpoint, creds$key, req$json_body)
-
-  if (failure(res)) {
-    stop(value(res))
-  }
-
-  code <- parse_response_message(value(res))
+  code <- api_answer_or_stop(do, creds, context, call_api)
 
   message(paste0(code, "\n"))
   invisible(code)
