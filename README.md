@@ -52,30 +52,48 @@ Air needs your API key for OpenAI.
 
 If you already have an OpenAI acount:
 
-1. Make sure your billing information with OpenAI is uptodate:
+1. Make sure your billing information with OpenAI is uptodate:  
    <https://platform.openai.com/account/billing/overview>
-2. Create an OpenAI API key:
+2. Create an OpenAI **API key**:  
    <https://platform.openai.com/api-keys>
+3. Note which of one of OpenAI's **models** you wish to use:  
+   <https://platform.openai.com/docs/models>
 
-### Securely storing your OpenAI key locally
+Please set your API credentials (key and model) either in your your R environment, or in your system's secure keyring (suggested).
 
-Then store your key securely in your operating system's keyring using Air:
+### Setting your OpenAI credentials in your R environment:
 
-We recommend you use your system's keyring function to enter it safely in a system popup window:
+Your R environment can specify user level environment variables stored in a local `.Renviron` file. Please note that anyone with access to this file can steal your credentials – make sure not to expose it to any other processes.
 
-```R
-air::set_key()
+Please [read about .Renviron files](https://rstats.wtf/r-startup.html#renviron) if you are unfamiliar with them. Briefly, to set your OpenAI API credentials, we suggest using `usethis::edit_r_environ()` to open the correct `.Renviron` file for editing. You may create `VAR=value` pairs to set your API key and preferred model in this file - for example:
+
+```text
+OPENAI_KEY="sk-my-api-key"
+OPENAI_MODEL="gpt-4-1106-preview"
 ```
 
-Or, you can do so programatically at the console, but note that it might be stored in your `.Rhistory` file where it could get compromised:
+You will have to restart the R session for these new environment variables to be loaded. You can confirm they are present in your R environment by using:
 
 ```R
+Sys.getenv("OPENAI_KEY")
+Sys.getenv("OPENAI_MODEL")
+```
+
+### Securely setting OpenAI credentials in your system keyring
+
+Alternatively, we recommend storing your key and model preference securely in your operating system's keyring using `Air`'s built-in functions for accessing the keyring.
+
+We recommend you use your system's keyring to enter it safely in a system popup window. But you may choose to set it programatically at the console, but note that it will be stored in your `.Rhistory` file where it could get compromised:
+
+```R
+# Safely set the key in a system popup
+air::set_key()
+
+# or programatically set it:
 air::set_key("api-key-goes-here")
 ```
 
-### Setting your preferred OpenAI model
-
-You must also specify the model you wish to use.
+You must also specify the OpenAI model you prefer to use:
 
 ```R
 # Set your preferred model
@@ -85,11 +103,13 @@ set_model("gpt-4-1106-preview")
 set_model()
 ```
 
+Note that your system may occasionally popup windows to get your login password to access the keyring for these credentials. We suggest using an 'always accept' option in such popups to reduce how often you see them.
+
 You may later delete your key and model from your keyring using:
 
 ```R
-air::delete_key()
-air::delete_model()
+# Wipes away all keyring credentials stored by this package
+delete_keyring_credentials()
 ```
 
 ## Usage

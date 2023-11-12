@@ -18,24 +18,6 @@ get_model <- function() {
   get_credential("OPENAI_MODEL")
 }
 
-get_credential <- function(secret) {
-  res <- get_env_secret(secret)
-  if (!success(res)) {
-    res <- get_keyring_secret(secret)
-  }
-
-  return(res)
-}
-
-get_env_secret <- function(secret) {
-  value <- Sys.getenv(secret)
-  if (value == "") {
-    result(FALSE, "notfound", paste0("No ", secret, " found."))
-  } else {
-    result(TRUE, "success", value)
-  }
-}
-
 #' Securely stores your your OpenAI API key to your OS keyring.
 #'
 #' @param key Optional string of your OpenAI API key;
@@ -60,8 +42,8 @@ set_key <- function(key = NULL) {
 #' @param model String of your preferred model; defaults to 'gpt-4'.
 #'
 #' @examples
-#' set_model("gpt-4-1106-preview")
-#' set_model() # use default
+#' # set_model("gpt-4-1106-preview")
+#' # set_model() # use default
 #'
 #' @export
 set_model <- function(model = "gpt-4") {
@@ -73,26 +55,37 @@ set_model <- function(model = "gpt-4") {
   }
 }
 
-#' Deletes your securely stored OpenAI API key from your OS keyring.
+#' Deletes your securely stored OpenAI API key and preferred model
+#' from your OS keyring.
 #'
 #' @examples
-#' delete_key()
+#' delete_keyring_credentials()
 #'
 #' @export
-delete_key <- function() {
-  res <- delete_keyring_secret("OPENAI_KEY")
-  message(value(res))
+delete_keyring_credentials <- function() {
+  keyring::key_delete("air-rpkg")
 }
 
-#' Deletes your stored OpenAI API model from your OS keyring.
+#' Gets a secret credential from your keyring or env variables.
 #'
-#' @examples
-#' delete_model()
+#' It first checks the environment variables, then the keyring.
 #'
-#' @export
-delete_model <- function() {
-  res <- delete_keyring_secret("OPENAI_MODEL")
-  message(value(res))
+get_credential <- function(secret) {
+  res <- get_env_secret(secret)
+  if (!success(res)) {
+    res <- get_keyring_secret(secret)
+  }
+
+  return(res)
+}
+
+get_env_secret <- function(secret) {
+  value <- Sys.getenv(secret)
+  if (value == "") {
+    result(FALSE, "notfound", paste0("No ", secret, " found."))
+  } else {
+    result(TRUE, "success", value)
+  }
 }
 
 get_keyring_secret <- function(secret) {
@@ -140,21 +133,6 @@ set_keyring_secret <- function(secret, value = NULL) {
       message(paste0(
         "Warning while trying to set your secure ", secret, ":\n", cond
       ))
-      result(TRUE, "warn", cond)
-    }
-  )
-}
-
-delete_keyring_secret <- function(secret) {
-  tryCatch(
-    expr = {
-      keyring::key_delete(service = "air-rpkg", username = secret)
-      result(TRUE, "deleted", paste0("Deleted ", secret))
-    },
-    error = function(cond) {
-      result(FALSE, "error", cond)
-    },
-    warning = function(cond) {
       result(TRUE, "warn", cond)
     }
   )
