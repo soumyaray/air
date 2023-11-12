@@ -10,7 +10,7 @@
 #' @export
 set_key <- function(key = NULL) {
   res <- set_secret("openai-key", key)
-  if(res$success) {
+  if (res$success) {
     message("Your key is securely set!")
   } else {
     message("Error setting your key: please submit an issue with details")
@@ -43,11 +43,7 @@ set_model <- function(model = "gpt-4") {
 #' @export
 delete_key <- function() {
   res <- delete_secret("openai-key")
-  ifelse(
-    res$success,
-    message("Your secure key is deleted!"),
-    message("Error deleting your key: please submit an issue with details")
-  )
+  message(res$message)
 }
 
 #' Deletes your stored OpenAI API model from your OS keyring.
@@ -58,24 +54,22 @@ delete_key <- function() {
 #' @export
 delete_model <- function() {
   res <- delete_secret("openai-model")
-  ifelse(
-    res$success,
-    message("Your secure model is deleted!"),
-    message("Error deleting your model: please submit an issue with details")
-  )
+  message(res$message)
 }
 
 get_secret <- function(secret) {
   tryCatch(
-    value <- keyring::key_get(service = "air-rpkg", username = secret),
+    expr = {
+      value <- keyring::key_get(service = "air-rpkg", username = secret)
+      result(TRUE, "success", value)
+    },
     error = function(cond) {
-      return(result(FALSE, "error", cond))
+      result(FALSE, "error", cond)
     },
     warning = function(cond) {
-      return(result(TRUE, "warn", value))
+      result(TRUE, "warn", value)
     }
   )
-  return(result(TRUE, "success", value))
 }
 
 get_secret_or_return <- function(secret) {
@@ -115,18 +109,15 @@ set_secret <- function(secret, value = NULL) {
 
 delete_secret <- function(secret) {
   tryCatch(
-    keyring::key_delete(service = "air-rpkg", username = secret),
+    expr = {
+      keyring::key_delete(service = "air-rpkg", username = secret)
+      result(TRUE, "deleted", paste0("Deleted ", secret))
+    },
     error = function(cond) {
-      message(paste0(
-        "Error trying to delete your secure ", secret, ":\n", cond
-      ))
-      return(result(FALSE, "error", cond))
+      result(FALSE, "error", cond)
     },
     warning = function(cond) {
-      message(paste0(
-        "Warning while trying to delete your secure ", secret, ":\n", cond
-      ))
-      return(result(TRUE, "warn", cond))
+      result(TRUE, "warn", cond)
     }
   )
 }
