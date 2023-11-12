@@ -48,11 +48,11 @@ call_openai <- function(endpoint, key, json_body) {
       result(
         success = success,
         status = httr::http_status(res)$message,
-        message = msg
+        value = msg
       )
     },
     error = \(cond) {
-      result(success = FALSE, status = "Connection Error", message = cond)
+      result(success = FALSE, status = "Connection Error", value = cond)
     }
   )
 }
