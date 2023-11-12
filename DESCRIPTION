@@ -1,15 +1,15 @@
 Package: air
 Type: Package
 Title: AI help for R coding
-Version: 0.1.2
+Version: 0.2.0
 Authors@R: 
     person(given = "Soumya",
            family = "Ray",
            role = c("aut", "cre"),
            email = "soumya.ray@gmail.com")
-Description: Air is an R package that lets you ask R related questions to OpenAI 
-    and get working code. It's main feature is to find solutions to simple 
-    "how-to" questions and direclty providing working code.
+Description: Air is an R package that lets you ask R related questions to an AI.
+    It can answer "how-to" questions by writing code, and "whatis" questions to
+    explain what given code does.
 License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true
