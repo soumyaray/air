@@ -13,7 +13,7 @@ set_model(model = "gpt-4")
 Securely stores your your OpenAI API key to your OS keyring.
 }
 \examples{
-set_model("gpt-4-1106-preview")
-set_model() # use default
+# set_model("gpt-4-1106-preview")
+# set_model() # use default
 
 }

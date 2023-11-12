@@ -14,7 +14,7 @@ if not provided, a popup will ask you to enter it (safer).}
 Securely stores your your OpenAI API key to your OS keyring.
 }
 \examples{
-set_key("sk-my-api-key")
-set_key()
+# set_key("sk-my-api-key")
+# set_key()
 
 }

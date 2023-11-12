@@ -1,0 +1,51 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: ''
+      string: '{"model":"gpt-4-1106-preview","messages":[{"role":"system","content":"I
+        want you to act as an R programming expert. I want you to answer only with
+        code, without triple backtics. Do not write explanations."},{"role":"user","content":"How
+        do I get the first element of a list?"}]}'
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: application/json
+      Authorization: Bearer foobar
+  response:
+    status:
+      status_code: 401
+      category: Client error
+      reason: Unauthorized
+      message: 'Client error: (401) Unauthorized'
+    headers:
+      alt-svc: h3=":443"; ma=86400
+      cf-cache-status: DYNAMIC
+      cf-ray: 824ef5572dbc4a52-TPE
+      content-length: '256'
+      content-type: application/json; charset=utf-8
+      date: Sun, 12 Nov 2023 13:00:31 GMT
+      server: cloudflare
+      set-cookie:
+      - __cf_bm=tbJnyVaqDcXeuEpXGgX9upgJyWfexI2U8Zsq64FDbiw-1699794031-0-ATkkFbfwyHeRoM3LPRVeVkP4QGPGWA/55LXXOnz8SAjGXRMeD+lx8T4rsjy4Pv95rXKzNs1Qy7XozVEtfITU+FQ=;
+        path=/; expires=Sun, 12-Nov-23 13:30:31 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      - _cfuvid=Ypht18_P5yvaiR378lB.z6buPe_jTaUMq0lKVAosgXY-1699794031496-0-604800000;
+        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      strict-transport-security: max-age=15724800; includeSubDomains
+      vary: Origin
+      x-request-id: dfff5dbc0951492ce7fe8a1ff6a4d5e7
+    body:
+      encoding: ''
+      file: no
+      string: |
+        {
+            "error": {
+                "message": "Incorrect API key provided: foobar. You can find your API key at https://platform.openai.com/account/api-keys.",
+                "type": "invalid_request_error",
+                "param": null,
+                "code": "invalid_api_key"
+            }
+        }
+  recorded_at: 2023-11-12 13:00:31 GMT
+  recorded_with: vcr/1.2.2, webmockr/0.9.0

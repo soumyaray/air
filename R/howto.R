@@ -11,18 +11,26 @@
 #'
 #' @export
 howto <- function(do, call_api = call_openai) {
-  key <- get_secret_or_return("openai-key")
-  model <- get_secret_or_return("openai-model")
+  key_res <- get_key()
+  model_res <- get_model()
+
+  if (failure(key_res) || failure(model_res)) {
+    stop(paste("Please set your OpenAI key and model first.\n",
+               "See package documentation for details."))
+  }
+
+  key <- value(key_res)
+  model <- value(model_res)
 
   req <- ai_completion_request(do, model)
   res <- call_api(req$endpoint, key, req$json_body)
 
-  if (!res$success) {
-    stop(res$message)
+  if (failure(res)) {
+    stop(value(res))
   }
 
-  code <- parse_response_message(res$message)
+  code <- parse_response_message(value(res))
 
-  cat(paste0(code, "\n"))
+  message(paste0(code, "\n"))
   invisible(code)
 }
