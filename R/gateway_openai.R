@@ -1,12 +1,8 @@
-ai_completion_request <- function(do, model) {
+ai_completion_request <- function(do, model, context) {
   endpoint <- "https://api.openai.com/v1/chat/completions"
 
   messages <- list(
-    list(role = "system",
-         content = paste(
-           "I want you to act as an R programming expert.",
-           "I want you to answer only with code, without triple backtics.",
-           "Do not write explanations.")),
+    list(role = "system", content = context),
     list(role = "user", content = do)
   )
 
