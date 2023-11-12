@@ -73,6 +73,25 @@ Or, you can do so programatically at the console, but note that it might be stor
 air::set_key("api-key-goes-here")
 ```
 
+### Setting your preferred OpenAI model
+
+You must also specify the model you wish to use.
+
+```R
+# Set your preferred model
+set_model("gpt-4-1106-preview")
+
+# or use the default model (see documentation)
+set_model()
+```
+
+You may later delete your key and model from your keyring using:
+
+```R
+air::delete_key()
+air::delete_model()
+```
+
 ## Usage
 
 ```R
