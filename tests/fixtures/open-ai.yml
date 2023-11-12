@@ -1,0 +1,73 @@
+http_interactions:
+- request:
+    method: post
+    uri: https://api.openai.com/v1/chat/completions
+    body:
+      encoding: ''
+      string: '{"model":"gpt-4-1106-preview","messages":[{"role":"system","content":"I
+        want you to act as an R programming expert. I want you to answer only with
+        code, without triple backtics. Do not write explanations."},{"role":"user","content":"How
+        do I get the first element of a list?"}]}'
+    headers:
+      Accept: application/json, text/xml, application/xml, */*
+      Content-Type: application/json
+      Authorization: Bearer <<<api_key>>>
+  response:
+    status:
+      status_code: 200
+      category: Success
+      reason: OK
+      message: 'Success: (200) OK'
+    headers:
+      date: Sun, 12 Nov 2023 05:13:37 GMT
+      content-type: application/json
+      access-control-allow-origin: '*'
+      cache-control: no-cache, must-revalidate
+      openai-model: gpt-4-1106-preview
+      openai-organization: user-itunupboadxzapmbyjlmrenx
+      openai-processing-ms: '582'
+      openai-version: '2020-10-01'
+      strict-transport-security: max-age=15724800; includeSubDomains
+      x-ratelimit-limit-requests: '10000'
+      x-ratelimit-limit-tokens: '150000'
+      x-ratelimit-remaining-requests: '9999'
+      x-ratelimit-remaining-tokens: '149937'
+      x-ratelimit-reset-requests: 8.64s
+      x-ratelimit-reset-tokens: 24ms
+      x-request-id: 0c3de0dd888529ad5b96ea31b8a6a1a3
+      cf-cache-status: DYNAMIC
+      set-cookie: __cf_bm=H8oy2GhFhyeSvehwa9Z2kF5xkd97q8nAHPJVyOp7zo8-1699766017-0-AXkg7sOjibKukRQh9moEln7/labCjfsVWMxEk8ea70qTXbyq7Gabua0F4clTbMWBeyzK4inKxAmp9I2u78KT7Z0=;
+        path=/; expires=Sun, 12-Nov-23 05:43:37 GMT; domain=.api.openai.com; HttpOnly;
+        Secure; SameSite=None
+      server: cloudflare
+      cf-ray: 824c49652b604a94-TPE
+      content-encoding: gzip
+      alt-svc: h3=":443"; ma=86400
+    body:
+      encoding: ''
+      file: no
+      string: |
+        {
+          "id": "chatcmpl-8Jx4rIz3nUc6dkP13vV9u4afZU8tB",
+          "object": "chat.completion",
+          "created": 1699766017,
+          "model": "gpt-4-1106-preview",
+          "choices": [
+            {
+              "index": 0,
+              "message": {
+                "role": "assistant",
+                "content": "my_list <- list(1, 2, 3)\nfirst_element <- my_list[[1]]"
+              },
+              "finish_reason": "stop"
+            }
+          ],
+          "usage": {
+            "prompt_tokens": 52,
+            "completion_tokens": 21,
+            "total_tokens": 73
+          },
+          "system_fingerprint": "fp_a24b4d720c"
+        }
+  recorded_at: 2023-11-12 05:13:37 GMT
+  recorded_with: vcr/1.2.2, webmockr/0.9.0
