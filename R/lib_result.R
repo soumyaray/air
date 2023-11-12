@@ -6,7 +6,7 @@ result <- function(success = TRUE, status = "ok", value = "done") {
 }
 
 # Makes calling function to return with a Result
-return_with <- function(success = TRUE, status = "ok", value = "done"){
+return_with <- function(success = TRUE, status = "ok", value = "done") {
   res <- result(success = success, status = status, value = value)
   do.call(return, list(res), envir = sys.frame(-1))
 }
