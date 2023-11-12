@@ -1,12 +1,16 @@
 Package: air
 Type: Package
-Title: What the Package Does (Title Case)
+Title: AI help for R coding
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: MIT
+Authors@R: 
+    person(given = "Soumya",
+           family = "Ray",
+           role = c("aut", "cre"),
+           email = "soumya.ray@gmail.com")
+Description: Air is an R package that lets you ask R related questions to OpenAI 
+    and get working code. It's main feature is to find solutions to simple 
+    "how-to" questions and direclty providing working code.
+License: `use_mit_license()`
 Encoding: UTF-8
 LazyData: true
 Imports: 
