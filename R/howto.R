@@ -6,14 +6,14 @@ howto <- function(do, call_api = call_openai) {
   req <- ai_completion_request(do, model)
   res <- call_api(req$endpoint, key, req$json_body)
 
-  code <- parse_response_message(res)
+  code <- parse_response_message(res$message)
 
   cat(paste0(code, "\n"))
   invisible(code)
 }
 
-parse_response_message <- function(res) {
-  res_obj <- rjson::fromJSON(rawToChar(res$body))
+parse_response_message <- function(json_body) {
+  res_obj <- rjson::fromJSON(json_body)
   res_obj$choices[[1]]$message$content
 }
 
@@ -37,13 +37,30 @@ ai_completion_request <- function(do, model) {
 }
 
 call_openai <- function(endpoint, key, json_body) {
-  res = httr2::request(endpoint) |>
-    httr2::req_auth_bearer_token(key) |>
-    httr2::req_headers("Content-Type" = "application/json") |>
-    httr2::req_body_raw(json_body) |>
-    # httr2::req_error(is_error = function(resp) FALSE) |>
-    httr2::req_perform()
-    # httr2::req_dry_run()
+  ## TODO: Switch to httr2 instead of httr once vcr support available:
+  ## VCR issue: https://github.com/ropensci/vcr/issues/237
+  # res = httr2::request(endpoint) |>
+  #   httr2::req_auth_bearer_token(key) |>
+  #   httr2::req_headers("Content-Type" = "application/json") |>
+  #   httr2::req_body_raw(json_body) |>
+  #   # httr2::req_error(is_error = function(resp) FALSE) |>
+  #   httr2::req_perform()
+  #   # httr2::req_dry_run()
+
+  res = httr::POST(
+    url = endpoint,
+    httr::add_headers(
+      `Content-Type` = "application/json",
+      Authorization = paste0("Bearer ", key)
+    ),
+    body = json_body
+  )
+
+  result(
+    success = httr::http_status(res)$category == "Success",
+    status = httr::http_status(res)$message,
+    message = rawToChar(res$content)
+  )
 }
 
 result <- function(success = TRUE, status = "ok", message = "done") {
@@ -155,3 +172,37 @@ delete_secret <- function(secret) {
     }
   )
 }
+
+## Useful for stubbing call_api:
+# list_a <- list(item1 = list(attr1 = "A", attr2 = "B"),
+#                item2 = list(attr1 = "C", attr2 = "D"),
+#                item3 = list(attr1 = "A", attr2 = "B"))
+
+# vector_b <- c("A", "B")
+# names(vector_b) <- c("attr1", "attr2")
+
+# matching_element <- sapply(list_a, function(item) {
+#   all(unname(sapply(names(vector_b), function(attr) item[[attr]] == vector_b[[attr]])))
+# })
+
+# matching_element <- names(which(matching_element))
+
+## Making secret/hidden parameteres to a function
+# make_function <- function(x, y, ...) {
+#   # Hidden parameters
+#   hidden_params <- list(...)
+#
+#   # Discouraging message
+#   if (!is.null(hidden_params)) {
+#     message("Warning: Use of hidden parameters is discouraged.")
+#   }
+#
+#   # Function's main code
+#   # (Example operation using x and y)
+#   result <- x + y
+#
+#   # Possibly use hidden parameters
+#   #...
+#
+#   return(result)
+# }
