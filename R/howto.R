@@ -14,22 +14,22 @@ howto <- function(do, call_api = call_openai) {
   key_res <- get_key()
   model_res <- get_model()
 
-  if (!key_res$success || !model_res$success) {
+  if (failure(key_res) || failure(model_res)) {
     stop(paste("Please set your OpenAI key and model first.\n",
                "See package documentation for details."))
   }
 
-  key <- key_res$message
-  model <- model_res$message
+  key <- value(key_res)
+  model <- value(model_res)
 
   req <- ai_completion_request(do, model)
   res <- call_api(req$endpoint, key, req$json_body)
 
-  if (!res$success) {
-    stop(res$message)
+  if (failure(res)) {
+    stop(value(res))
   }
 
-  code <- parse_response_message(res$message)
+  code <- parse_response_message(value(res))
 
   message(paste0(code, "\n"))
   invisible(code)

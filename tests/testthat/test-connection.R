@@ -1,7 +1,7 @@
 test_that("SAD: catches API connectivity error", {
   dead_api <- \(endpoint, key, json_body) {
     result(success = FALSE, status = "Error",
-           message = "Connection Error to OpenAI API")
+           value = "Connection Error to OpenAI API")
   }
 
   bad <- \() {

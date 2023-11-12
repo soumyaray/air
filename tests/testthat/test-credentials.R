@@ -7,7 +7,7 @@ test_that("BAD: catches an invalid API key", {
 
   # Unset API key env var, and let VCR will use fake replacement key
   key <- Sys.getenv("OPENAI_KEY")
-  Sys.setenv("OPENAI_KEY"="foobar")
+  Sys.setenv("OPENAI_KEY" = "foobar")
   # Should throw a helpful error
   expect_error(bad(), "Incorrect")
   Sys.setenv("OPENAI_KEY" = key)

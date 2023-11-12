@@ -20,7 +20,7 @@ get_model <- function() {
 
 get_credential <- function(secret) {
   res <- get_env_secret(secret)
-  if (!res$success) {
+  if (!success(res)) {
     res <- get_keyring_secret(secret)
   }
 
@@ -48,7 +48,7 @@ get_env_secret <- function(secret) {
 #' @export
 set_key <- function(key = NULL) {
   res <- set_keyring_secret("OPENAI_KEY", key)
-  if (res$success) {
+  if (success(res)) {
     message("Your key is securely set!")
   } else {
     message("Error setting your key: please submit an issue with details")
@@ -66,7 +66,7 @@ set_key <- function(key = NULL) {
 #' @export
 set_model <- function(model = "gpt-4") {
   res <- set_keyring_secret("OPENAI_MODEL", model)
-  if (res$success) {
+  if (success(res)) {
     message(paste0("Your preferred model is now ", model, "."))
   } else {
     message("Error setting your model: please submit an issue with details")
@@ -81,7 +81,7 @@ set_model <- function(model = "gpt-4") {
 #' @export
 delete_key <- function() {
   res <- delete_keyring_secret("OPENAI_KEY")
-  message(res$message)
+  message(value(res))
 }
 
 #' Deletes your stored OpenAI API model from your OS keyring.
@@ -92,7 +92,7 @@ delete_key <- function() {
 #' @export
 delete_model <- function() {
   res <- delete_keyring_secret("OPENAI_MODEL")
-  message(res$message)
+  message(value(res))
 }
 
 get_keyring_secret <- function(secret) {
@@ -113,8 +113,8 @@ get_keyring_secret <- function(secret) {
 get_keyring_secret_or_return <- function(secret) {
   res <- get_keyring_secret(secret)
   ifelse(
-    res$success,
-    res$message,
+    success(res),
+    value(res),
     return_with(paste0("The secret credential '", secret, "' is not yet set.")))
 }
 
