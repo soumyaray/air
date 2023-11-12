@@ -1,3 +1,14 @@
+#' Ask OpenAI to write R code for a problem.
+#' The answer is written to console and returned as a string.
+#'
+#' @param do Character string of what you want to do
+#' @param call_api Optional function to call another API
+#' @return Invisible character string of R code
+#'
+#' @examples
+#' howto("read a csv file")
+#' howto("get last element of a vector")
+#'
 #' @export
 howto <- function(do, call_api = call_openai) {
   key <- get_secret_or_return("openai-key")
