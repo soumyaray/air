@@ -11,19 +11,15 @@
 #'
 #' @export
 howto <- function(do, call_api = call_openai) {
-  key_res <- get_key()
-  model_res <- get_model()
+  creds <- validated_credentials_or_stop()
 
-  if (failure(key_res) || failure(model_res)) {
-    stop(paste("Please set your OpenAI key and model first.\n",
-               "See package documentation for details."))
-  }
+  context <- paste(
+    "I want you to act as an R programming expert.",
+    "I want you to answer only with code, without triple backtics.",
+    "Do not write explanations.")
 
-  key <- value(key_res)
-  model <- value(model_res)
-
-  req <- ai_completion_request(do, model)
-  res <- call_api(req$endpoint, key, req$json_body)
+  req <- ai_completion_request(do, creds$model, context)
+  res <- call_api(req$endpoint, creds$key, req$json_body)
 
   if (failure(res)) {
     stop(value(res))
