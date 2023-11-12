@@ -1,8 +1,12 @@
 # Air - AI help for R coding
 
-Air is an R package that lets you ask R related questions to OpenAI and get working code.
+Air is an R package that lets you ask R related questions to OpenAI and get working code, or explanations of code.
 
-It's main feature is to find solutions to simple "how-to" questions and direclty providing working code:
+## Features
+
+### HowTo
+
+You can ask "how-to" questions to get working code solutions:
 
 ```R
 howto("get a vector of the second element from a list of vectors")
@@ -13,16 +17,45 @@ howto("extract the second largest number from a vector")
 # sort(unique(vec), decreasing = TRUE)[2]
 ```
 
+### WhatIs
+
+You can ask "what-is" questions to get detailed explanations of code you cannot understand:
+
+```R
+whatis("paste0(vector1, vector2)")
+# [Abbreviated output]
+# Overall, the R function `paste0` concatenates vectors after 
+# converting them to characters. It combines corresponding 
+# elements of `vector1` and `vector2` without any separator.
+#
+# Sub-expressions:
+# - `paste0`: The function used for concatenation without any separator.
+#
+# Example:
+#
+# ```R
+# vector1 <- c("Apple", "Banana", "Cherry")
+# vector2 <- c("Pie", "Bread", "Jam")
+#
+# result <- paste0(vector1, vector2)
+# print(result)
+# ```
+#
+# Output:
+# ```
+# [1] "ApplePie"   "BananaBread"   "CherryJam"
+# ```
+```
+
+## AI Large Language Model (LLM) from OpenAI
+
 Air requires your OpenAI API key (see Setup direcitons below), which it stores securely in your operating system's keyring.
 
 Future features under consideration:
 
-- Ask for explanation of what given R code does (e.g, `whatis()`).
-- Provide code and explanation for R problems (e.g., `teachme()`).
 - Keep conversation session so we can ask followup questions.
 - General AI role (e.g., `tellme()`).
-- Create custom roles (store in `.Renviron`?)
-- Optionally store OpenAI keys in `.Renviron`; check from both environment and keyring.
+- Create custom roles
 
 Feel free to leave issues or reach out to maintainers with any questions.
 
@@ -120,3 +153,11 @@ library(air)
 howto("zip vectors foo and bar together, creating a list of vectors which are pairs of elements from the original two vectors")
 # zip_list <- mapply(c, foo, bar, SIMPLIFY=FALSE)
 ```
+
+## Testing
+
+Please run tests using `devtools::test()`
+
+## Contributing
+
+Please first submit Github issues for bugs or feature suggestions, for discussion on whether and how to fix or implement them. We greatly welcome pull requests on open issues that are slated for development. We also welcome suggestions or fixes for documentation.
