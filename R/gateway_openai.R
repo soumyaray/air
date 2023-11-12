@@ -34,18 +34,24 @@ call_openai <- function(endpoint, key, json_body) {
   #   httr2::req_perform()
   #   # httr2::req_dry_run()
 
-  res <- httr::POST(
-    url = endpoint,
-    httr::add_headers(
-      `Content-Type` = "application/json",
-      Authorization = paste0("Bearer ", key)
-    ),
-    body = json_body
-  )
-
-  result(
-    success = httr::http_status(res)$category == "Success",
-    status = httr::http_status(res)$message,
-    message = rawToChar(res$content)
+  tryCatch(
+    expr = {
+      res <- httr::POST(
+        url = endpoint,
+        httr::add_headers(
+          `Content-Type` = "application/json",
+          Authorization = paste0("Bearer ", key)
+        ),
+        body = json_body
+      )
+      result(
+        success = httr::http_status(res)$category == "Success",
+        status = httr::http_status(res)$message,
+        message = rawToChar(res$content)
+      )
+    },
+    error = \(cond) {
+      result(success = FALSE, status = "Connection Error", message = cond)
+    }
   )
 }

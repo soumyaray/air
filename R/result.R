@@ -1,6 +1,8 @@
 # Acts as a simple Result monad for R
 result <- function(success = TRUE, status = "ok", message = "done") {
-  list(success = success, status = status, message = message)
+  obj <- list(success = success, status = status, message = message)
+  class(obj) <- c("result", class(obj))
+  obj
 }
 
 # Makes calling function to return with a Result

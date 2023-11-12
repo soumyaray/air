@@ -6,6 +6,10 @@ howto <- function(do, call_api = call_openai) {
   req <- ai_completion_request(do, model)
   res <- call_api(req$endpoint, key, req$json_body)
 
+  if (!res$success) {
+    stop(res$message)
+  }
+
   code <- parse_response_message(res$message)
 
   cat(paste0(code, "\n"))
