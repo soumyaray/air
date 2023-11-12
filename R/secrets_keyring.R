@@ -1,21 +1,46 @@
+#' Securely stores your your OpenAI API key to your OS keyring.
+#'
+#' @param key Optional string of your OpenAI API key;
+#'            if not provided, a popup will ask you to enter it (safer).
+#'
+#' @examples
+#' set_key("sk-my-api-key")
+#' set_key()
+#'
+#' @export
 set_key <- function(key = NULL) {
   res <- set_secret("openai-key", key)
-  ifelse(
-    res$success,
-    message("Your key is securely set!"),
+  if(res$success) {
+    message("Your key is securely set!")
+  } else {
     message("Error setting your key: please submit an issue with details")
-  )
+  }
 }
 
-set_model <- function(model = NULL) {
+#' Securely stores your your OpenAI API key to your OS keyring.
+#'
+#' @param model String of your preferred model; defaults to 'gpt-4'.
+#'
+#' @examples
+#' set_model("gpt-4-1106-preview")
+#' set_model() # use default
+#'
+#' @export
+set_model <- function(model = "gpt-4") {
   res <- set_secret("openai-model", model)
-  ifelse(
-    res$success,
-    message("Your preferred model is securely set!"),
+  if (res$success) {
+    message(paste0("Your preferred model is now ", model, "."))
+  } else {
     message("Error setting your model: please submit an issue with details")
-  )
+  }
 }
 
+#' Deletes your securely stored OpenAI API key from your OS keyring.
+#'
+#' @examples
+#' delete_key()
+#'
+#' @export
 delete_key <- function() {
   res <- delete_secret("openai-key")
   ifelse(
@@ -25,6 +50,12 @@ delete_key <- function() {
   )
 }
 
+#' Deletes your stored OpenAI API model from your OS keyring.
+#'
+#' @examples
+#' delete_model()
+#'
+#' @export
 delete_model <- function() {
   res <- delete_secret("openai-model")
   ifelse(
