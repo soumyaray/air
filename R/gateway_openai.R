@@ -1,8 +1,3 @@
-parse_response_message <- function(json_body) {
-  res_obj <- rjson::fromJSON(json_body)
-  res_obj$choices[[1]]$message$content
-}
-
 ai_completion_request <- function(do, model) {
   endpoint <- "https://api.openai.com/v1/chat/completions"
 
@@ -44,14 +39,30 @@ call_openai <- function(endpoint, key, json_body) {
         ),
         body = json_body
       )
+
+      success <- httr::http_status(res)$category == "Success"
+      msg <- ifelse(success,
+        rawToChar(res$content),
+        parse_response_error(rawToChar(res$content)))
+
       result(
-        success = httr::http_status(res)$category == "Success",
+        success = success,
         status = httr::http_status(res)$message,
-        message = rawToChar(res$content)
+        message = msg
       )
     },
     error = \(cond) {
       result(success = FALSE, status = "Connection Error", message = cond)
     }
   )
+}
+
+parse_response_message <- function(json_body) {
+  res_obj <- rjson::fromJSON(json_body)
+  res_obj$choices[[1]]$message$content
+}
+
+parse_response_error <- function(json_body) {
+  res_obj <- rjson::fromJSON(json_body)
+  res_obj$error$message
 }

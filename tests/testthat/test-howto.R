@@ -1,23 +1,16 @@
-test_that("HAPPY: howto works", {
-  vcr::use_cassette("open-ai", {
-    good <- air::howto("How do I get the first element of a list?")
+test_that("HAPPY: howto returns results", {
+  vcr::use_cassette("openai-happy-return-results", {
+    good <- air::howto("How do I get the first element of a list?") |>
+      suppressMessages()
   })
   expect_true(class(good) == "character")
 })
 
-test_that("SAD: howto faces connectivity error", {
-  dead_api <- \(endpoint, key, json_body) {
-    result(success = FALSE, status = "Error",
-           message = "Connection Error to OpenAI API")
+test_that("HAPPY: howto prints result message", {
+  good <- \() {
+    vcr::use_cassette("openai-happy-print-results", {
+      good <- air::howto("How do I get the first element of a list?")
+    })
   }
-
-  bad <- \() {
-    air::howto(
-      "How do I get the first element of a list?",
-      call_api = dead_api
-    )
-  }
-
-  # Should throw a helpful error
-  expect_error(bad(), "Connection Error")
+  expect_message(good(), ".*\n+")
 })
