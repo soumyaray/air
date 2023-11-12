@@ -10,6 +10,11 @@ License: MIT
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    httr2,
+    httr,
     keyring,
     rjson
+Suggests: 
+    testthat (>= 3.0.0),
+    vcr (>= 0.6.0)
+Config/testthat/edition: 3
+RoxygenNote: 7.2.3
