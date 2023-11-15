@@ -6,7 +6,6 @@ result <- function(successful, status, value) {
   obj
 }
 
-#' make s3 print function for result, which prints its value
 #' @export
 print.result <- function(x, ...) {
   print(x$value)

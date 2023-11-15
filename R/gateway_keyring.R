@@ -74,10 +74,8 @@ delete_keyring_credentials <- function() {
   )
 }
 
-#' Gets a secret credential from your keyring or env variables.
-#'
-#' It first checks the environment variables, then the keyring.
-#'
+# Gets a secret credential from your keyring or env variables.
+# It first checks the environment variables, then the keyring.
 get_credential <- function(secret) {
   res <- get_env_secret(secret)
   if (!is_success(res)) {
