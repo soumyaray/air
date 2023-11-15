@@ -48,7 +48,7 @@ call_openai <- function(endpoint, key, json_body) {
       )
     },
     error = \(cond) {
-      result(success = FALSE, status = "Connection Error", value = cond)
+      failure(status = "Connection Error", value = cond)
     }
   )
 }
