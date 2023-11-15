@@ -63,7 +63,17 @@ set_model <- function(model = "gpt-4") {
 #'
 #' @export
 delete_keyring_credentials <- function() {
-  keyring::key_delete("air-rpkg")
+  tryCatch(
+    expr = {
+      keyring::key_delete("air-rpkg")
+      result(success = TRUE, status = "success",
+             value = "Credentials deleted")
+    },
+    error = \(cond) {
+      result(success = FALSE, status = "error",
+             value = "No credentials to delete")
+    }
+  )
 }
 
 #' Gets a secret credential from your keyring or env variables.
