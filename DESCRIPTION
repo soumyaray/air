@@ -10,7 +10,7 @@ Authors@R:
 Description: Air is an R package that lets you ask R related questions to an AI.
     It can answer "how-to" questions by writing code, and "whatis" questions to
     explain what given code does.
-License: `use_mit_license()`
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
