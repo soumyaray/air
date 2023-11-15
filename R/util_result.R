@@ -21,32 +21,14 @@ failure <- function(status = "error", value = "failed") {
   result(success = FALSE, status = status, value = value)
 }
 
-# Makes calling function to return with a Result
-return_with <- function(success = TRUE, status = "ok", value = "done") {
-  res <- result(success = success, status = status, value = value)
-  do.call(return, list(res), envir = sys.frame(-1))
-}
+is_success <- function(obj) UseMethod("is_success", obj)
+is_failure <- function(obj) UseMethod("is_failure", obj)
+value <- function(obj) UseMethod("value", obj)
+status <- function(obj) UseMethod("status", obj)
 
-is_success <- function(obj) {
-  UseMethod("is_success", obj)
-}
+is_success.success <- function(obj) TRUE
+is_success.failure <- function(obj) FALSE
+is_failure.result <- function(obj) !is_success(obj)
 
-is_failure <- function(obj) {
-  UseMethod("is_failure", obj)
-}
-
-value <- function(obj) {
-  UseMethod("value", obj)
-}
-
-is_success.result <- function(obj) {
-  obj$success
-}
-
-is_failure.result <- function(obj) {
-  !is_success(obj)
-}
-
-value.result <- function(obj) {
-  obj$value
-}
+status.result <- function(obj) obj$status
+value.result <- function(obj) obj$value

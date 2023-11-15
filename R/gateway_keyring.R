@@ -111,25 +111,17 @@ get_keyring_secret <- function(secret) {
   )
 }
 
-get_keyring_secret_or_return <- function(secret) {
-  res <- get_keyring_secret(secret)
-  ifelse(
-    is_success(res),
-    value(res),
-    return_with(paste0("The secret credential '", secret, "' is not yet set.")))
-}
-
 set_keyring_secret <- function(secret, value = NULL) {
   tryCatch(
     if (is.null(value)) {
       keyring::key_set(service = "air-rpkg", username = secret)
-      success("success", secret)
+      success("set", secret)
     } else {
       keyring::key_set_with_value(
         service = "air-rpkg",
         username = secret,
         password = value)
-      success("success", secret)
+      success("set", secret)
     },
     error = function(cond) {
       message(paste0(
@@ -141,7 +133,7 @@ set_keyring_secret <- function(secret, value = NULL) {
       message(paste0(
         "Warning while trying to set your secure ", secret, ":\n", cond
       ))
-      success("warn", cond)
+      success("warning", cond)
     }
   )
 }
