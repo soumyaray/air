@@ -6,8 +6,11 @@
 #' @return Invisible character string of R code
 #'
 #' @examples
+#' # You must provision an OpenAI API key before using this function.
+#' \dontrun{
 #' howto("read a csv file")
 #' howto("get last element of a vector")
+#' }
 #'
 #' @export
 howto <- function(do, call_api = call_openai) {

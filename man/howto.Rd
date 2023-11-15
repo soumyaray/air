@@ -20,7 +20,10 @@ Ask OpenAI to write R code for a problem.
 The answer is written to console and returned as a string.
 }
 \examples{
+# You must provision an OpenAI API key before using this function.
+\dontrun{
 howto("read a csv file")
 howto("get last element of a vector")
+}
 
 }

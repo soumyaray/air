@@ -45,8 +45,5 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
-        env:
-          OPENAI_KEY: ${{ secrets.OPENAI_KEY }}
-          OPENAI_MODEL: ${{ secrets.OPENAI_MODEL }}
         with:
           upload-snapshots: true
