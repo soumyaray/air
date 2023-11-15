@@ -24,8 +24,11 @@ get_model <- function() {
 #'            if not provided, a popup will ask you to enter it (safer).
 #'
 #' @examples
-#' # set_key("sk-my-api-key")
-#' # set_key()
+#' # CAREFUL: Changes your OpenAI API key in your OS keyring
+#' \dontrun{
+#' set_key("sk-my-api-key") # sets the key directly (will show in .Rhistory)
+#' set_key()                # opens a system popup for secure entry
+#' }
 #'
 #' @export
 set_key <- function(key = NULL) {
@@ -42,8 +45,11 @@ set_key <- function(key = NULL) {
 #' @param model String of your preferred model; defaults to 'gpt-4'.
 #'
 #' @examples
-#' # set_model("gpt-4-1106-preview")
-#' # set_model() # use default
+#' CAREFUL: Changes your OpenAI API model in your OS keyring
+#' \dontrun{
+#' set_model("gpt-4-1106-preview")
+#' set_model() # use default
+#' }
 #'
 #' @export
 set_model <- function(model = "gpt-4") {
@@ -59,7 +65,10 @@ set_model <- function(model = "gpt-4") {
 #' from your OS keyring.
 #'
 #' @examples
+#' CAREFUL: Deletes OpenAI API key and preferred model from your OS keyring
+#' \dontrun{
 #' delete_keyring_credentials()
+#' }
 #'
 #' @export
 delete_keyring_credentials <- function() {

@@ -4,3 +4,4 @@
 ^\.github$
 ^\.vscode$
 ^\_snippets$
+^cran-comments\.md$

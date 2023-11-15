@@ -1,11 +1,11 @@
 Package: air
 Type: Package
-Title: AI help to write and understand R code
+Title: AI assistant to write and understand R code
 Version: 0.2.0
 Authors@R: 
     person(given = "Soumya",
            family = "Ray",
-           role = c("aut", "cre"),
+           role = c("aut", "cre", "cph"),
            email = "soumya.ray@gmail.com")
 Description: An R console utility that lets you ask R related questions to 
     OpenAI's large language model. It can answer "how-to" questions by directly 
