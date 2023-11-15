@@ -12,6 +12,9 @@ Deletes your securely stored OpenAI API key and preferred model
 from your OS keyring.
 }
 \examples{
+# CAREFUL: Deletes OpenAI API key and preferred model from your OS keyring
+\dontrun{
 delete_keyring_credentials()
+}
 
 }

@@ -45,7 +45,7 @@ set_key <- function(key = NULL) {
 #' @param model String of your preferred model; defaults to 'gpt-4'.
 #'
 #' @examples
-#' CAREFUL: Changes your OpenAI API model in your OS keyring
+#' # CAREFUL: Changes your OpenAI API model in your OS keyring
 #' \dontrun{
 #' set_model("gpt-4-1106-preview")
 #' set_model() # use default
@@ -65,7 +65,7 @@ set_model <- function(model = "gpt-4") {
 #' from your OS keyring.
 #'
 #' @examples
-#' CAREFUL: Deletes OpenAI API key and preferred model from your OS keyring
+#' # CAREFUL: Deletes OpenAI API key and preferred model from your OS keyring
 #' \dontrun{
 #' delete_keyring_credentials()
 #' }
