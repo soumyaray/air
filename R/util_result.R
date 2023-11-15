@@ -1,7 +1,7 @@
 # Acts as a  Result monad for R – all parameters must be specified
-result <- function(success, status, value) {
-  result_type <- ifelse(success, "success", "failure")
-  obj <- list(success = success, status = status, value = value)
+result <- function(successful, status, value) {
+  result_type <- ifelse(successful, "success", "failure")
+  obj <- list(status = status, value = value)
   class(obj) <- c(result_type, "result", class(obj))
   obj
 }
@@ -14,11 +14,11 @@ print.result <- function(x, ...) {
 
 # Acts as a sucess Result monad for R
 success <- function(status = "ok", value = "done") {
-  result(success = TRUE, status = status, value = value)
+  result(successful = TRUE, status = status, value = value)
 }
 
 failure <- function(status = "error", value = "failed") {
-  result(success = FALSE, status = status, value = value)
+  result(successful = FALSE, status = status, value = value)
 }
 
 is_success <- function(obj) UseMethod("is_success", obj)

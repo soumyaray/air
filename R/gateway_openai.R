@@ -36,13 +36,13 @@ call_openai <- function(endpoint, key, json_body) {
         body = json_body
       )
 
-      success <- httr::http_status(res)$category == "Success"
-      msg <- ifelse(success,
+      successful <- httr::http_status(res)$category == "Success"
+      msg <- ifelse(successful,
         rawToChar(res$content),
         parse_response_error(rawToChar(res$content)))
 
       result(
-        success = success,
+        successful = successful,
         status = httr::http_status(res)$message,
         value = msg
       )
