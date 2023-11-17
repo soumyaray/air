@@ -1,16 +1,17 @@
 Package: air
 Type: Package
 Title: AI Assistant to Write and Understand R Code
-Version: 0.2.1
+Version: 0.2.2
 Authors@R: 
     person(given = "Soumya",
            family = "Ray",
            role = c("aut", "cre", "cph"),
            email = "soumya.ray@gmail.com")
-Description: An R console utility that lets you ask R related questions to 
-    OpenAI's large language model. It can answer "how-to" questions by directly 
-    providing code, and "whatis" questions by explaining what given code does.
-    You must provision your own OpenAI API key.
+Description: An R console utility that lets you ask R related questions to the
+    'OpenAI' large language model. It can answer 'how-to()' questions by  
+    providing code, and 'whatis()' questions by explaining what given code does.
+    You must provision your own key for the 'OpenAI' API 
+    <https://platform.openai.com/docs/api-reference>.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true

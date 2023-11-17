@@ -7,6 +7,11 @@ from your OS keyring.}
 \usage{
 delete_keyring_credentials()
 }
+\value{
+\code{result} list of \code{success} or \code{failure} class with:
+\item{status}{A character string of operation status.}
+\item{value}{A character string of descriptive message of status.}
+}
 \description{
 Deletes your securely stored OpenAI API key and preferred model
 from your OS keyring.

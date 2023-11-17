@@ -10,6 +10,9 @@ set_key(key = NULL)
 \item{key}{Optional string of your OpenAI API key;
 if not provided, a popup will ask you to enter it (safer).}
 }
+\value{
+No return value; only side-effect and message printed to console
+}
 \description{
 Securely stores your your OpenAI API key to your OS keyring.
 }

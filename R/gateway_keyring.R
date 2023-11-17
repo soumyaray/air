@@ -1,19 +1,17 @@
-#' Gets your OpenAI API key credential.
-#'
-#' Searches for your OpenAI API key in the following order:
-#' 1. Environment variable `OPENAI_KEY` – can be set in your `.Renviron` file
-#' 2. OS keyring – can be set securely with `set_key()`
-#'
+# Gets your OpenAI API key credential.
+#
+# Searches for your OpenAI API key in the following order:
+# 1. Environment variable `OPENAI_KEY` – can be set in your `.Renviron` file
+# 2. OS keyring – can be set securely with `set_key()`
 get_key <- function() {
   get_credential("OPENAI_KEY")
 }
 
-#' Gets your OpenAI API model preference.
-#'
-#' Searches for your OpenAI API model preference in the following order:
-#' 1. Environment variable `OPENAI_MODEL` – can be set in your `.Renviron` file
-#' 2. OS keyring – can be set securely with `set_model()`
-#'
+# Gets your OpenAI API model preference.
+#
+# Searches for your OpenAI API model preference in the following order:
+# 1. Environment variable `OPENAI_MODEL` – can be set in your `.Renviron` file
+# 2. OS keyring – can be set securely with `set_model()`
 get_model <- function() {
   get_credential("OPENAI_MODEL")
 }
@@ -22,6 +20,8 @@ get_model <- function() {
 #'
 #' @param key Optional string of your OpenAI API key;
 #'            if not provided, a popup will ask you to enter it (safer).
+#'
+#' @return No return value; only side-effect and message printed to console
 #'
 #' @examples
 #' # CAREFUL: Changes your OpenAI API key in your OS keyring
@@ -44,6 +44,8 @@ set_key <- function(key = NULL) {
 #'
 #' @param model String of your preferred model; defaults to 'gpt-4'.
 #'
+#' @return No return value; only side-effect and message printed to console
+#'
 #' @examples
 #' # CAREFUL: Changes your OpenAI API model in your OS keyring
 #' \dontrun{
@@ -63,6 +65,10 @@ set_model <- function(model = "gpt-4") {
 
 #' Deletes your securely stored OpenAI API key and preferred model
 #' from your OS keyring.
+#'
+#' @return \code{result} list of \code{success} or \code{failure} class with:
+#' \item{status}{A character string of operation status.}
+#' \item{value}{A character string of descriptive message of status.}
 #'
 #' @examples
 #' # CAREFUL: Deletes OpenAI API key and preferred model from your OS keyring

@@ -6,10 +6,10 @@
 #' @return Invisible character string of explanation
 #'
 #' @examples
-#' #' # You must provision an OpenAI API key before using this function.
+#' # You must provision an OpenAI API key before using this function.
 #' \dontrun{
-#' # whatis("paste0(vector1, vector2)")
-#' # whatis("length(x) %% 2 == 1 ? x[(length(x) + 1) / 2] : NA")
+#' whatis("paste0(vector1, vector2)")
+#' whatis("length(x) %% 2 == 1 ? x[(length(x) + 1) / 2] : NA")
 #' }
 #'
 #' @export

@@ -9,6 +9,9 @@ set_model(model = "gpt-4")
 \arguments{
 \item{model}{String of your preferred model; defaults to 'gpt-4'.}
 }
+\value{
+No return value; only side-effect and message printed to console
+}
 \description{
 Securely stores your your OpenAI API key to your OS keyring.
 }
