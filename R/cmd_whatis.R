@@ -6,8 +6,11 @@
 #' @return Invisible character string of explanation
 #'
 #' @examples
-#' # whatis("paste0(vector1, vector2)")
-#' # whatis("length(x) %% 2 == 1 ? x[(length(x) + 1) / 2] : NA")
+#' # You must provision an OpenAI API key before using this function.
+#' \dontrun{
+#' whatis("paste0(vector1, vector2)")
+#' whatis("length(x) %% 2 == 1 ? x[(length(x) + 1) / 2] : NA")
+#' }
 #'
 #' @export
 whatis <- function(this, call_api = call_openai) {

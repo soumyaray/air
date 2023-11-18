@@ -1,16 +1,18 @@
 Package: air
 Type: Package
-Title: AI help for R coding
-Version: 0.2.0
+Title: AI Assistant to Write and Understand R Code
+Version: 0.2.2
 Authors@R: 
     person(given = "Soumya",
            family = "Ray",
-           role = c("aut", "cre"),
+           role = c("aut", "cre", "cph"),
            email = "soumya.ray@gmail.com")
-Description: Air is an R package that lets you ask R related questions to an AI.
-    It can answer "how-to" questions by writing code, and "whatis" questions to
-    explain what given code does.
-License: `use_mit_license()`
+Description: An R console utility that lets you ask R related questions to the
+    'OpenAI' large language model. It can answer 'how-to()' questions by  
+    providing code, and 'whatis()' questions by explaining what given code does.
+    You must provision your own key for the 'OpenAI' API 
+    <https://platform.openai.com/docs/api-reference>.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
@@ -22,3 +24,5 @@ Suggests:
     vcr (>= 0.6.0)
 Config/testthat/edition: 3
 RoxygenNote: 7.2.3
+URL: https://github.com/soumyaray/air
+BugReports: https://github.com/soumyaray/air/issues

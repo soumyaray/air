@@ -10,11 +10,17 @@ set_key(key = NULL)
 \item{key}{Optional string of your OpenAI API key;
 if not provided, a popup will ask you to enter it (safer).}
 }
+\value{
+No return value; only side-effect and message printed to console
+}
 \description{
 Securely stores your your OpenAI API key to your OS keyring.
 }
 \examples{
-# set_key("sk-my-api-key")
-# set_key()
+# CAREFUL: Changes your OpenAI API key in your OS keyring
+\dontrun{
+set_key("sk-my-api-key") # sets the key directly (will show in .Rhistory)
+set_key()                # opens a system popup for secure entry
+}
 
 }

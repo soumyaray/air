@@ -83,9 +83,11 @@ Air needs your API key for OpenAI.
 
 ### Creating an OpenAI Key
 
-If you already have an OpenAI acount:
+Create an OpenAI acount if you don't have one at: <https://platform.openai.com/signup>
 
-1. Make sure your billing information with OpenAI is uptodate:  
+Ensure you have API credits by:
+
+1. Make sure your billing information with OpenAI is up-to-date:  
    <https://platform.openai.com/account/billing/overview>
 2. Create an OpenAI **API key**:  
    <https://platform.openai.com/api-keys>
