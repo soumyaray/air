@@ -20,10 +20,10 @@ Ask OpenAI to explain what given R code does.
 The answer is written to console and returned as a string.
 }
 \examples{
-#' # You must provision an OpenAI API key before using this function.
+# You must provision an OpenAI API key before using this function.
 \dontrun{
-# whatis("paste0(vector1, vector2)")
-# whatis("length(x) \%\% 2 == 1 ? x[(length(x) + 1) / 2] : NA")
+whatis("paste0(vector1, vector2)")
+whatis("length(x) \%\% 2 == 1 ? x[(length(x) + 1) / 2] : NA")
 }
 
 }

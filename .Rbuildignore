@@ -4,3 +4,5 @@
 ^\.github$
 ^\.vscode$
 ^\_snippets$
+^cran-comments\.md$
+^CRAN-SUBMISSION$
