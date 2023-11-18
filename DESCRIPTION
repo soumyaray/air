@@ -1,7 +1,7 @@
 Package: air
 Type: Package
 Title: AI Assistant to Write and Understand R Code
-Version: 0.2.2
+Version: 0.2.2.9000
 Authors@R: 
     person(given = "Soumya",
            family = "Ray",
