@@ -18,6 +18,7 @@ LazyData: true
 Imports: 
     httr,
     keyring,
+    result,
     rjson
 Suggests: 
     testthat (>= 3.0.0),

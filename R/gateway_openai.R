@@ -37,18 +37,26 @@ call_openai <- function(endpoint, key, json_body) {
       )
 
       successful <- httr::http_status(res)$category == "Success"
-      msg <- ifelse(successful,
-        rawToChar(res$content),
-        parse_response_error(rawToChar(res$content)))
+      status <- httr::http_status(res)$message
+      if (successful) {
+        msg <- rawToChar(res$content)
+        result::success(msg, status)
+      } else {
+        msg <- parse_response_error(rawToChar(res$content))
+        result::failure(msg, status)
+      }
+      # msg <- ifelse(successful,
+      #   rawToChar(res$content),
+      #   parse_response_error(rawToChar(res$content)))
 
-      result(
-        successful = successful,
-        status = httr::http_status(res)$message,
-        value = msg
-      )
+      # result::new_result(
+      #   successful = successful,
+      #   value = msg,
+      #   status = httr::http_status(res)$message
+      # )
     },
     error = \(cond) {
-      failure(status = "Connection Error", value = cond)
+      result::failure(value = cond, status = "Connection Error")
     }
   )
 }

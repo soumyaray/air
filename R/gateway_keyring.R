@@ -33,7 +33,7 @@ get_model <- function() {
 #' @export
 set_key <- function(key = NULL) {
   res <- set_keyring_secret("OPENAI_KEY", key)
-  if (is_success(res)) {
+  if (result::is_success(res)) {
     message("Your key is securely set!")
   } else {
     message("Error setting your key: please submit an issue with details")
@@ -56,7 +56,7 @@ set_key <- function(key = NULL) {
 #' @export
 set_model <- function(model = "gpt-4") {
   res <- set_keyring_secret("OPENAI_MODEL", model)
-  if (is_success(res)) {
+  if (result::is_success(res)) {
     message(paste0("Your preferred model is now ", model, "."))
   } else {
     message("Error setting your model: please submit an issue with details")
@@ -81,10 +81,10 @@ delete_keyring_credentials <- function() {
   tryCatch(
     expr = {
       keyring::key_delete("air-rpkg")
-      success(status = "success", value = "Credentials deleted")
+      result::success(value = "Credentials deleted", status = "success")
     },
     error = \(cond) {
-      failure(status = "error", value = "No credentials to delete")
+      result::failure(value = "No credentials to delete", status = "error")
     }
   )
 }
@@ -93,19 +93,19 @@ delete_keyring_credentials <- function() {
 # It first checks the environment variables, then the keyring.
 get_credential <- function(secret) {
   res <- get_env_secret(secret)
-  if (!is_success(res)) {
+  if (result::is_failure(res)) {
     res <- get_keyring_secret(secret)
   }
 
-  return(res)
+  res
 }
 
 get_env_secret <- function(secret) {
   value <- Sys.getenv(secret)
   if (value == "") {
-    failure("notfound", paste0("No ", secret, " found."))
+    result::failure(paste0("No ", secret, " found."), "notfound")
   } else {
-    success("success", value)
+    result::success(value, "success")
   }
 }
 
@@ -113,13 +113,13 @@ get_keyring_secret <- function(secret) {
   tryCatch(
     expr = {
       value <- keyring::key_get(service = "air-rpkg", username = secret)
-      success("success", value)
+      result::success(value, "success")
     },
     error = function(cond) {
-      failure("error", cond)
+      result::failure(cond, "error")
     },
     warning = function(cond) {
-      success("warn", value)
+      result::success(value, "warn")
     }
   )
 }
@@ -128,25 +128,25 @@ set_keyring_secret <- function(secret, value = NULL) {
   tryCatch(
     if (is.null(value)) {
       keyring::key_set(service = "air-rpkg", username = secret)
-      success("set", secret)
+      result::success("set", secret)
     } else {
       keyring::key_set_with_value(
         service = "air-rpkg",
         username = secret,
         password = value)
-      success("set", secret)
+      result::success(secret, "set")
     },
     error = function(cond) {
       message(paste0(
         "Error trying to set your secure ", secret, ":\n", cond
       ))
-      failure("error", cond)
+      result::failure(cond, "error")
     },
     warning = function(cond) {
       message(paste0(
         "Warning while trying to set your secure ", secret, ":\n", cond
       ))
-      success("warning", cond)
+      result::success(cond, "warning")
     }
   )
 }
