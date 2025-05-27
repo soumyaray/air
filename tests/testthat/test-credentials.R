@@ -20,7 +20,9 @@ test_that("BAD: catches an missing API key", {
 
     with_stubbed_credentials({
       Sys.unsetenv("OPENAI_KEY")
-      air::howto("How do I get the first element of a list?")
+      suppressWarnings(
+        air::howto("How do I get the first element of a list?")
+      )
     })
   }
 

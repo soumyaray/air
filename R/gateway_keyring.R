@@ -110,18 +110,23 @@ get_env_secret <- function(secret) {
 }
 
 get_keyring_secret <- function(secret) {
-  tryCatch(
-    expr = {
-      value <- keyring::key_get(service = "air-rpkg", username = secret)
-      result::success(value, "success")
-    },
-    error = function(cond) {
-      result::failure(cond, "error")
-    },
-    warning = function(cond) {
-      result::success(value, "warn")
+  value <- NULL
+  warned <- FALSE
+  tryCatch({
+    withCallingHandlers(
+      expr = {
+        value <<- keyring::key_get(service = "air-rpkg", username = secret)
+      },
+      warning = function(cond) warned <<- TRUE
+    )
+    if (!warned) {
+      result::success("success", value)
+    } else {
+      result::success("warning", value)
     }
-  )
+  }, error = function(cond) {
+    result::failure("error", cond)
+  })
 }
 
 set_keyring_secret <- function(secret, value = NULL) {
