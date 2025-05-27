@@ -1,4 +1,8 @@
-# air (development version)
+# air 0.2.3
+
+# air 0.2.3
+
+This patch fixes a potential issue with how warnings from `keyring` are handled.
 
 # air 0.2.2
 
