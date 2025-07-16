@@ -8,6 +8,4 @@ with_stubbed_credentials({
     ),
     dir = vcr::vcr_test_path("fixtures")
   ))
-
-  vcr::check_cassette_names()
 })
