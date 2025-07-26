@@ -1,70 +1,74 @@
 http_interactions:
 - request:
-    method: post
+    method: POST
     uri: https://api.openai.com/v1/chat/completions
     body:
-      encoding: ''
-      string: '{"model":"gpt-4-1106-preview","messages":[{"role":"system","content":"I
+      string: '{"model":"<<<api_model>>>","messages":[{"role":"system","content":"I
         want you to act as an R programming expert. I want you to answer only with
         code, without triple backtics. Do not write explanations."},{"role":"user","content":"How
         do I get the first element of a list?"}]}'
-    headers:
-      Accept: application/json, text/xml, application/xml, */*
-      Content-Type: application/json
-      Authorization: Bearer <<<api_key>>>
   response:
-    status:
-      status_code: 200
-      category: Success
-      reason: OK
-      message: 'Success: (200) OK'
+    status: 200
     headers:
-      date: Sun, 12 Nov 2023 15:26:04 GMT
+      date: Sat, 26 Jul 2025 06:34:34 GMT
       content-type: application/json
-      access-control-allow-origin: '*'
-      cache-control: no-cache, must-revalidate
-      openai-model: gpt-4-1106-preview
+      access-control-expose-headers: X-Request-ID
       openai-organization: user-itunupboadxzapmbyjlmrenx
-      openai-processing-ms: '1270'
+      openai-processing-ms: '532'
+      openai-project: proj_bgJfD9iVOp7UpaM4r2jti756
       openai-version: '2020-10-01'
-      strict-transport-security: max-age=15724800; includeSubDomains
-      x-ratelimit-limit-requests: '10000'
-      x-ratelimit-limit-tokens: '150000'
-      x-ratelimit-remaining-requests: '9998'
-      x-ratelimit-remaining-tokens: '149937'
-      x-ratelimit-reset-requests: 16.251s
-      x-ratelimit-reset-tokens: 24ms
-      x-request-id: e24c8be94b37af1a781710110521b5ef
+      x-envoy-upstream-service-time: '535'
+      x-ratelimit-limit-requests: '500'
+      x-ratelimit-limit-tokens: '30000'
+      x-ratelimit-remaining-requests: '499'
+      x-ratelimit-remaining-tokens: '29953'
+      x-ratelimit-reset-requests: 120ms
+      x-ratelimit-reset-tokens: 94ms
+      x-request-id: req_8f48e33fd9784f4cd0cc0fcba09e2bcc
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
       cf-cache-status: DYNAMIC
+      x-content-type-options: nosniff
       server: cloudflare
-      cf-ray: 824fca83ce6c4a52-TPE
+      cf-ray: 9651df3bdfec4a45-TPE
       content-encoding: gzip
       alt-svc: h3=":443"; ma=86400
     body:
-      encoding: ''
-      file: no
       string: |
         {
-          "id": "chatcmpl-8K6dWhaTavfksYHOmMkfDq7ZbFOyY",
+          "id": "chatcmpl-BxSmIFw99ZKKh890fDkjggPNWNwHb",
           "object": "chat.completion",
-          "created": 1699802762,
-          "model": "gpt-4-1106-preview",
+          "created": 1753511674,
+          "model": "<<<api_model>>>",
           "choices": [
             {
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "my_list <- list(\"a\", \"b\", \"c\")\nfirst_element <- my_list[[1]]"
+                "content": "my_list <- list(1, 2, 3)\nfirst_element <- my_list[[1]]",
+                "refusal": null,
+                "annotations": []
               },
+              "logprobs": null,
               "finish_reason": "stop"
             }
           ],
           "usage": {
             "prompt_tokens": 52,
             "completion_tokens": 21,
-            "total_tokens": 73
+            "total_tokens": 73,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
           },
-          "system_fingerprint": "fp_a24b4d720c"
+          "service_tier": "default",
+          "system_fingerprint": null
         }
-  recorded_at: 2023-11-12 15:26:04 GMT
-  recorded_with: vcr/1.2.2, webmockr/0.9.0
+  recorded_at: 2025-07-26 06:34:34
+recorded_with: VCR-vcr/2.0.0
