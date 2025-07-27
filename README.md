@@ -1,6 +1,20 @@
 # Air - AI help for R coding
 
-Air is an R package that lets you ask R related questions to OpenAI and get working code, or explanations of code.
+Air is an R package that lets you ask R-related questions to OpenAI and get working code, or explanations of code.
+
+- [Air - AI help for R coding](#air---ai-help-for-r-coding)
+  - [Features](#features)
+    - [HowTo](#howto)
+    - [WhatIs](#whatis)
+  - [AI Large Language Model (LLM) from OpenAI](#ai-large-language-model-llm-from-openai)
+  - [Installation](#installation)
+  - [Setup](#setup)
+    - [Creating an OpenAI Key](#creating-an-openai-key)
+    - [Setting your OpenAI credentials in your R environment:](#setting-your-openai-credentials-in-your-r-environment)
+    - [Securely setting OpenAI credentials in your system keyring](#securely-setting-openai-credentials-in-your-system-keyring)
+  - [Usage](#usage)
+  - [Testing](#testing)
+  - [Contributing](#contributing)
 
 ## Features
 
@@ -160,6 +174,12 @@ howto("zip vectors foo and bar together, creating a list of vectors which are pa
 
 Please run tests using `devtools::test()`
 
+Tests do not require an OpenAI API key; outward facing functions are tested with `vcr` cassettes.
+
 ## Contributing
 
-Please first submit Github issues for bugs or feature suggestions, for discussion on whether and how to fix or implement them. We greatly welcome pull requests on open issues that are slated for development. We also welcome suggestions or fixes for documentation.
+Consider first submitting Github issues for bugs or feature suggestions, for discussion on whether and how to fix or implement them. 
+
+We greatly welcome pull requests on open issues that are slated for development. We also welcome suggestions or fixes for documentation.
+
+Please base your pull requests on the `develop` branch, and prefix your branch name with `username/fix-`, `username/feat-`, etc. (where `username` is your Github username) to indicate the type of change.

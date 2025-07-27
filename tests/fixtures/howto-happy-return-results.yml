@@ -1,76 +1,74 @@
 http_interactions:
 - request:
-    method: post
+    method: POST
     uri: https://api.openai.com/v1/chat/completions
     body:
-      encoding: ''
-      string: '{"model":"gpt-4-1106-preview","messages":[{"role":"system","content":"I
+      string: '{"model":"<<<api_model>>>","messages":[{"role":"system","content":"I
         want you to act as an R programming expert. I want you to answer only with
         code, without triple backtics. Do not write explanations."},{"role":"user","content":"How
         do I get the first element of a list?"}]}'
-    headers:
-      Accept: application/json, text/xml, application/xml, */*
-      Content-Type: application/json
-      Authorization: Bearer <<<api_key>>>
   response:
-    status:
-      status_code: 200
-      category: Success
-      reason: OK
-      message: 'Success: (200) OK'
+    status: 200
     headers:
-      access-control-allow-origin: '*'
-      alt-svc: h3=":443"; ma=86400
-      cache-control: no-cache, must-revalidate
-      cf-cache-status: DYNAMIC
-      cf-ray: 824fca7a98ba4a52-TPE
-      content-encoding: gzip
+      date: Sat, 26 Jul 2025 06:34:34 GMT
       content-type: application/json
-      date: Sun, 12 Nov 2023 15:26:02 GMT
-      openai-model: gpt-4-1106-preview
+      access-control-expose-headers: X-Request-ID
       openai-organization: user-itunupboadxzapmbyjlmrenx
-      openai-processing-ms: '647'
+      openai-processing-ms: '990'
+      openai-project: proj_bgJfD9iVOp7UpaM4r2jti756
       openai-version: '2020-10-01'
+      x-envoy-upstream-service-time: '992'
+      x-ratelimit-limit-requests: '500'
+      x-ratelimit-limit-tokens: '30000'
+      x-ratelimit-remaining-requests: '499'
+      x-ratelimit-remaining-tokens: '29953'
+      x-ratelimit-reset-requests: 120ms
+      x-ratelimit-reset-tokens: 94ms
+      x-request-id: req_023292bf6e7fe48d0c40fb7a8a10c054
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+      cf-cache-status: DYNAMIC
+      x-content-type-options: nosniff
       server: cloudflare
-      set-cookie:
-      - __cf_bm=aaLhGWqllD.jCYs.yXeIThDXbRrPH9JUFf66W4bgAjU-1699802762-0-Ad/iowZGOlmbgsXHC6Hx2GGZkLh9dzooncW1txCkULxWIqBzRYvh20X4uML23FKkbX55JOAEJsp3tSgmmSmqWG4=;
-        path=/; expires=Sun, 12-Nov-23 15:56:02 GMT; domain=.api.openai.com; HttpOnly;
-        Secure; SameSite=None
-      - _cfuvid=5ReRVFn3CWeolWdY7E.hNZuTvqqlsMUvpoCDwEvsmNc-1699802762705-0-604800000;
-        path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
-      strict-transport-security: max-age=15724800; includeSubDomains
-      x-ratelimit-limit-requests: '10000'
-      x-ratelimit-limit-tokens: '150000'
-      x-ratelimit-remaining-requests: '9999'
-      x-ratelimit-remaining-tokens: '149937'
-      x-ratelimit-reset-requests: 8.64s
-      x-ratelimit-reset-tokens: 24ms
-      x-request-id: 99b8aee77a57ab4520259a344d567c20
+      cf-ray: 9651df3418714a45-TPE
+      content-encoding: gzip
+      alt-svc: h3=":443"; ma=86400
     body:
-      encoding: ''
-      file: no
       string: |
         {
-          "id": "chatcmpl-8K6dV9brAUXShCXDyRG5NhMrbtNNz",
+          "id": "chatcmpl-BxSmHpbPjybLBEt8kDmnMi65SQGgL",
           "object": "chat.completion",
-          "created": 1699802761,
-          "model": "gpt-4-1106-preview",
+          "created": 1753511673,
+          "model": "<<<api_model>>>",
           "choices": [
             {
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "list <- list(\"first\", \"second\", \"third\")\nfirst_element <- list[[1]]"
+                "content": "my_list <- list(1, \"hello\", TRUE)\nfirst_element <- my_list[[1]]",
+                "refusal": null,
+                "annotations": []
               },
+              "logprobs": null,
               "finish_reason": "stop"
             }
           ],
           "usage": {
             "prompt_tokens": 52,
-            "completion_tokens": 19,
-            "total_tokens": 71
+            "completion_tokens": 20,
+            "total_tokens": 72,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
           },
-          "system_fingerprint": "fp_a24b4d720c"
+          "service_tier": "default",
+          "system_fingerprint": null
         }
-  recorded_at: 2023-11-12 15:26:02 GMT
-  recorded_with: vcr/1.2.2, webmockr/0.9.0
+  recorded_at: 2025-07-26 06:34:34
+recorded_with: VCR-vcr/2.0.0

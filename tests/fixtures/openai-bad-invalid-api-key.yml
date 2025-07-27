@@ -1,43 +1,33 @@
 http_interactions:
 - request:
-    method: post
+    method: POST
     uri: https://api.openai.com/v1/chat/completions
     body:
-      encoding: ''
-      string: '{"model":"gpt-4-1106-preview","messages":[{"role":"system","content":"I
+      string: '{"model":"<<<api_model>>>","messages":[{"role":"system","content":"I
         want you to act as an R programming expert. I want you to answer only with
         code, without triple backtics. Do not write explanations."},{"role":"user","content":"How
         do I get the first element of a list?"}]}'
-    headers:
-      Accept: application/json, text/xml, application/xml, */*
-      Content-Type: application/json
-      Authorization: Bearer foobar
   response:
-    status:
-      status_code: 401
-      category: Client error
-      reason: Unauthorized
-      message: 'Client error: (401) Unauthorized'
+    status: 401
     headers:
       alt-svc: h3=":443"; ma=86400
       cf-cache-status: DYNAMIC
-      cf-ray: 824ef5572dbc4a52-TPE
+      cf-ray: 9651df310d9d4a45-TPE
       content-length: '256'
       content-type: application/json; charset=utf-8
-      date: Sun, 12 Nov 2023 13:00:31 GMT
+      date: Sat, 26 Jul 2025 06:34:32 GMT
       server: cloudflare
       set-cookie:
-      - __cf_bm=tbJnyVaqDcXeuEpXGgX9upgJyWfexI2U8Zsq64FDbiw-1699794031-0-ATkkFbfwyHeRoM3LPRVeVkP4QGPGWA/55LXXOnz8SAjGXRMeD+lx8T4rsjy4Pv95rXKzNs1Qy7XozVEtfITU+FQ=;
-        path=/; expires=Sun, 12-Nov-23 13:30:31 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=4HFI41rhIql.KhJGbWU3TGrragVQ37SoFElshjlqitc-1753511672-1.0.1.1-lML4qSM.jVzA.6.qrLPmkS0bJC302iQMfEMekiA6Y2PwvrkZ5ng8a88xpQ821hDyqtZOw2sRTWfX5jmAKgCmy7yUJ3Ne7250tnfZ4Jfrr8E;
+        path=/; expires=Sat, 26-Jul-25 07:04:32 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=Ypht18_P5yvaiR378lB.z6buPe_jTaUMq0lKVAosgXY-1699794031496-0-604800000;
+      - _cfuvid=EhpaPPT9XE2WCOlgGpp2Cmby8uiU2qBYDT63oYUrrow-1753511672657-0.0.1.1-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
-      strict-transport-security: max-age=15724800; includeSubDomains
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
       vary: Origin
-      x-request-id: dfff5dbc0951492ce7fe8a1ff6a4d5e7
+      x-content-type-options: nosniff
+      x-request-id: req_0591486ac5a54abeeb52d832bca80f1a
     body:
-      encoding: ''
-      file: no
       string: |
         {
             "error": {
@@ -47,5 +37,5 @@ http_interactions:
                 "code": "invalid_api_key"
             }
         }
-  recorded_at: 2023-11-12 13:00:31 GMT
-  recorded_with: vcr/1.2.2, webmockr/0.9.0
+  recorded_at: 2025-07-26 06:34:32
+recorded_with: VCR-vcr/2.0.0
