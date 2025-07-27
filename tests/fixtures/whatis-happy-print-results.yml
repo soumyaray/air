@@ -1,72 +1,76 @@
 http_interactions:
 - request:
-    method: post
+    method: POST
     uri: https://api.openai.com/v1/chat/completions
     body:
-      encoding: ''
-      string: '{"model":"gpt-4-1106-preview","messages":[{"role":"system","content":"I
+      string: '{"model":"<<<api_model>>>","messages":[{"role":"system","content":"I
         want you to act as an R code explanation expert. I want you to first explain
         what the overall code does, then explain what each sub-expression of the code
         does and finish with a simple example with its output, if possible. Do not
         overexplain or write too much."},{"role":"user","content":"paste0(vector1,
         vector2)"}]}'
-    headers:
-      Accept: application/json, text/xml, application/xml, */*
-      Content-Type: application/json
-      Authorization: Bearer <<<api_key>>>
   response:
-    status:
-      status_code: 200
-      category: Success
-      reason: OK
-      message: 'Success: (200) OK'
+    status: 200
     headers:
-      date: Sun, 12 Nov 2023 15:26:15 GMT
+      date: Sat, 26 Jul 2025 06:34:46 GMT
       content-type: application/json
-      access-control-allow-origin: '*'
-      cache-control: no-cache, must-revalidate
-      openai-model: gpt-4-1106-preview
+      access-control-expose-headers: X-Request-ID
       openai-organization: user-itunupboadxzapmbyjlmrenx
-      openai-processing-ms: '5626'
+      openai-processing-ms: '6702'
+      openai-project: proj_bgJfD9iVOp7UpaM4r2jti756
       openai-version: '2020-10-01'
-      strict-transport-security: max-age=15724800; includeSubDomains
-      x-ratelimit-limit-requests: '10000'
-      x-ratelimit-limit-tokens: '150000'
-      x-ratelimit-remaining-requests: '9996'
-      x-ratelimit-remaining-tokens: '149910'
-      x-ratelimit-reset-requests: 27.044s
-      x-ratelimit-reset-tokens: 36ms
-      x-request-id: 0ac8992ab2851d033712741ea366d8b4
+      x-envoy-upstream-service-time: '6705'
+      x-ratelimit-limit-requests: '500'
+      x-ratelimit-limit-tokens: '30000'
+      x-ratelimit-remaining-requests: '499'
+      x-ratelimit-remaining-tokens: '29925'
+      x-ratelimit-reset-requests: 120ms
+      x-ratelimit-reset-tokens: 150ms
+      x-request-id: req_825f2f8e768da95febac7f87b3980bbf
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
       cf-cache-status: DYNAMIC
+      x-content-type-options: nosniff
       server: cloudflare
-      cf-ray: 824fcaac4db64a52-TPE
+      cf-ray: 9651df5fbc9b4a45-TPE
       content-encoding: gzip
       alt-svc: h3=":443"; ma=86400
     body:
-      encoding: ''
-      file: no
       string: |
         {
-          "id": "chatcmpl-8K6ddMPvdAU7sWWMS33An9bQc0fkw",
+          "id": "chatcmpl-BxSmOGzT7iFVTuvSXOuddIT2I6ah0",
           "object": "chat.completion",
-          "created": 1699802769,
-          "model": "gpt-4-1106-preview",
+          "created": 1753511680,
+          "model": "<<<api_model>>>",
           "choices": [
             {
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "The overall code using `paste0(vector1, vector2)` in R concatenates the corresponding elements of two vectors without any separator.\n\n**Sub-expression explanation:**\n\n- `paste0()`: This is an R function that combines strings together.\n- `vector1`: This is the first vector to be concatenated.\n- `vector2`: This is the second vector that will be concatenated to the elements of the first vector.\n\nThe `paste0` function in R will concatenate the elements at the same positions in `vector1` and `vector2`. In case of different lengths, the shorter vector will be recycled to match the length of the longer vector.\n\n**Simple example with output:**\n\n```r\nvector1 <- c(\"apple\", \"banana\", \"cherry\")\nvector2 <- c(\"1\", \"2\", \"3\")\nresult <- paste0(vector1, vector2)\nprint(result)\n```\n\nOutput:\n```\n[1] \"apple1\"   \"banana2\"  \"cherry3\"\n```\n\nIn this example, each fruit name from `vector1` is combined with the corresponding number from `vector2`, resulting in a new vector with combined strings."
+                "content": "Overall, the `paste0` function in R is used to concatenate two vectors, `vector1` and `vector2`, element-wise into a single character vector, with no separator between the values from the two vectors.\n\nHere is a break-down of what each part of the `paste0` expression does:\n\n- `paste0`: This is the function used for concatenation in R.\n- `vector1`: The first argument to `paste0`, this is the first vector of values you want to concatenate.\n- `vector2`: The second argument to `paste0`, this is the second vector of values you want to concatenate with the first.\n\nThe function concatenates corresponding elements from `vector1` and `vector2`. It is assumed that both vectors are of the same length or one of them is of length 1. If the lengths of the vectors are different and neither is of length 1, a warning is printed, and the values are recycled to match the length of the longest vector.\n\nExample & Output:\n\n```R\n# Define two vectors\nvector1 <- c(\"A\", \"B\", \"C\")\nvector2 <- c(\"1\", \"2\", \"3\")\n\n# Use paste0 to concatenate them element-wise\nresult <- paste0(vector1, vector2)\n\n# Print the result\nprint(result)\n```\n\nOutput:\n```\n[1] \"A1\" \"B2\" \"C3\"\n```\n\nIn this example, \"A\" is concatenated with \"1\", \"B\" with \"2\", and \"C\" with \"3\", resulting in a character vector with the combined values.",
+                "refusal": null,
+                "annotations": []
               },
+              "logprobs": null,
               "finish_reason": "stop"
             }
           ],
           "usage": {
             "prompt_tokens": 75,
-            "completion_tokens": 240,
-            "total_tokens": 315
+            "completion_tokens": 331,
+            "total_tokens": 406,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
           },
-          "system_fingerprint": "fp_a24b4d720c"
+          "service_tier": "default",
+          "system_fingerprint": null
         }
-  recorded_at: 2023-11-12 15:26:15 GMT
-  recorded_with: vcr/1.2.2, webmockr/0.9.0
+  recorded_at: 2025-07-26 06:34:46
+recorded_with: VCR-vcr/2.0.0

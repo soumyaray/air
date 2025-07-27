@@ -1,9 +1,11 @@
 test_that("BAD: catches an invalid API key", {
   bad_invalid_api_key <- \() {
-    # Unset API key env var, and let VCR will use fake replacement key
-    Sys.setenv("OPENAI_KEY" = "foobar")
+    key <- Sys.getenv("OPENAI_KEY")
+    on.exit(Sys.setenv("OPENAI_KEY" = key))
+
     vcr::use_cassette("openai-bad-invalid-api-key", {
       with_stubbed_credentials({
+        Sys.setenv("OPENAI_KEY" = "foobar")
         air::howto("How do I get the first element of a list?")
       })
     })
@@ -20,7 +22,9 @@ test_that("BAD: catches an missing API key", {
 
     with_stubbed_credentials({
       Sys.unsetenv("OPENAI_KEY")
-      air::howto("How do I get the first element of a list?")
+      suppressWarnings(
+        air::howto("How do I get the first element of a list?")
+      )
     })
   }
 

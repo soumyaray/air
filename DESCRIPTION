@@ -1,28 +1,29 @@
 Package: air
 Type: Package
 Title: AI Assistant to Write and Understand R Code
-Version: 0.2.2
-Authors@R: 
-    person(given = "Soumya",
-           family = "Ray",
-           role = c("aut", "cre", "cph"),
-           email = "soumya.ray@gmail.com")
+Version: 0.2.3
+Authors@R: c(
+    person("Davis", "Vaughan", , "davis@posit.co", role = c("aut", "cre")),
+    person("Soumya", "Ray", , "soumya.ray@gmail.com", role = c("aut"))
+  )
 Description: An R console utility that lets you ask R related questions to the
-    'OpenAI' large language model. It can answer 'how-to()' questions by  
-    providing code, and 'whatis()' questions by explaining what given code does.
+    'OpenAI' large language model. It can answer how-to questions by  
+    providing code, and what-is questions by explaining what given code does.
     You must provision your own key for the 'OpenAI' API 
     <https://platform.openai.com/docs/api-reference>.
+Depends: R (>= 4.1.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
     httr,
     keyring,
+    result,
     rjson
 Suggests: 
     testthat (>= 3.0.0),
     vcr (>= 0.6.0)
 Config/testthat/edition: 3
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.2
 URL: https://github.com/soumyaray/air
 BugReports: https://github.com/soumyaray/air/issues

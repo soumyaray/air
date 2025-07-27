@@ -1,72 +1,76 @@
 http_interactions:
 - request:
-    method: post
+    method: POST
     uri: https://api.openai.com/v1/chat/completions
     body:
-      encoding: ''
-      string: '{"model":"gpt-4-1106-preview","messages":[{"role":"system","content":"I
+      string: '{"model":"<<<api_model>>>","messages":[{"role":"system","content":"I
         want you to act as an R code explanation expert. I want you to first explain
         what the overall code does, then explain what each sub-expression of the code
         does and finish with a simple example with its output, if possible. Do not
         overexplain or write too much."},{"role":"user","content":"paste0(vector1,
         vector2)"}]}'
-    headers:
-      Accept: application/json, text/xml, application/xml, */*
-      Content-Type: application/json
-      Authorization: Bearer <<<api_key>>>
   response:
-    status:
-      status_code: 200
-      category: Success
-      reason: OK
-      message: 'Success: (200) OK'
+    status: 200
     headers:
-      date: Sun, 12 Nov 2023 15:26:09 GMT
+      date: Sat, 26 Jul 2025 06:34:39 GMT
       content-type: application/json
-      access-control-allow-origin: '*'
-      cache-control: no-cache, must-revalidate
-      openai-model: gpt-4-1106-preview
+      access-control-expose-headers: X-Request-ID
       openai-organization: user-itunupboadxzapmbyjlmrenx
-      openai-processing-ms: '4655'
+      openai-processing-ms: '4703'
+      openai-project: proj_bgJfD9iVOp7UpaM4r2jti756
       openai-version: '2020-10-01'
-      strict-transport-security: max-age=15724800; includeSubDomains
-      x-ratelimit-limit-requests: '10000'
-      x-ratelimit-limit-tokens: '150000'
-      x-ratelimit-remaining-requests: '9997'
-      x-ratelimit-remaining-tokens: '149910'
-      x-ratelimit-reset-requests: 23.349s
-      x-ratelimit-reset-tokens: 36ms
-      x-request-id: 0b4d8ce1538ac3ef64fdef6600190cd5
+      x-envoy-upstream-service-time: '4706'
+      x-ratelimit-limit-requests: '500'
+      x-ratelimit-limit-tokens: '30000'
+      x-ratelimit-remaining-requests: '499'
+      x-ratelimit-remaining-tokens: '29925'
+      x-ratelimit-reset-requests: 120ms
+      x-ratelimit-reset-tokens: 150ms
+      x-request-id: req_3b9989b4cd2227fcb8af7934f3404dbd
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
       cf-cache-status: DYNAMIC
+      x-content-type-options: nosniff
       server: cloudflare
-      cf-ray: 824fca8d6c6f4a52-TPE
+      cf-ray: 9651df40bcbc4a45-TPE
       content-encoding: gzip
       alt-svc: h3=":443"; ma=86400
     body:
-      encoding: ''
-      file: no
       string: |
         {
-          "id": "chatcmpl-8K6dYtouwwYCveggEGKWBJ2pG7g5I",
+          "id": "chatcmpl-BxSmJG4t74JcURlerEherjEpqh8H4",
           "object": "chat.completion",
-          "created": 1699802764,
-          "model": "gpt-4-1106-preview",
+          "created": 1753511675,
+          "model": "<<<api_model>>>",
           "choices": [
             {
               "index": 0,
               "message": {
                 "role": "assistant",
-                "content": "Overall, the R code `paste0(vector1, vector2)` combines two vectors element-wise into a single character vector, concatenating the corresponding elements without any separator.\n\nExplanation of the sub-expressions:\n\n- `paste0`: This is a function in R that takes one or more R objects, converts them to character vectors, and then concatenates them together. Unlike the `paste` function, `paste0` does not insert any separator between the objects.\n- `vector1`: The first vector to be concatenated.\n- `vector2`: The second vector to be concatenated.\n\nSimple Example:\n\n```R\nvector1 <- c(\"apple\", \"banana\")\nvector2 <- c(\"juice\", \"smoothie\")\nresult <- paste0(vector1, vector2)\nprint(result)\n```\n\nOutput:\n```\n[1] \"applejuice\"     \"bananasmoothie\"\n```\n\nIn this example, the `paste0` function combines the first elements of `vector1` and `vector2` to create \"applejuice\" and the second elements to create \"bananasmoothie\"."
+                "content": "The `paste0()` function in R concatenates vectors after converting each value to a character string. Unlike `paste()`, `paste0()` does not insert a separator between the elements.\n\nHere's the breakdown:\n\n- `paste0()`: The function used to concatenate the elements.\n- `vector1`: The first vector of elements to concatenate.\n- `vector2`: The second vector of elements to concatenate.\n\nThis function will take corresponding elements from `vector1` and `vector2` and concatenate them together without any additional separator (unlike `paste` which by default uses a space).\n\n### Example\n\n```r\nvector1 <- c(\"A\", \"B\", \"C\")\nvector2 <- c(\"1\", \"2\", \"3\")\nresult <- paste0(vector1, vector2)\n```\n\nOutput:\n```\n[1] \"A1\" \"B2\" \"C3\"\n```\n\nIn this example, the corresponding elements of `vector1` and `vector2` are concatenated to form a new vector \"A1\", \"B2\", \"C3\".",
+                "refusal": null,
+                "annotations": []
               },
+              "logprobs": null,
               "finish_reason": "stop"
             }
           ],
           "usage": {
             "prompt_tokens": 75,
-            "completion_tokens": 226,
-            "total_tokens": 301
+            "completion_tokens": 221,
+            "total_tokens": 296,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
           },
-          "system_fingerprint": "fp_a24b4d720c"
+          "service_tier": "default",
+          "system_fingerprint": null
         }
-  recorded_at: 2023-11-12 15:26:09 GMT
-  recorded_with: vcr/1.2.2, webmockr/0.9.0
+  recorded_at: 2025-07-26 06:34:39
+recorded_with: VCR-vcr/2.0.0

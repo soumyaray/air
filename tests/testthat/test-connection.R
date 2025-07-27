@@ -1,7 +1,6 @@
 test_that("SAD: catches API connectivity error", {
   dead_api <- \(endpoint, key, json_body) {
-    result(success = FALSE, status = "Error",
-           value = "Connection Error to OpenAI API")
+    result::failure("Connection Error to OpenAI API", status = "Error")
   }
 
   with_stubbed_credentials({

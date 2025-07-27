@@ -11,8 +11,6 @@ test_that("HAPPY: howto returns results", {
 })
 
 test_that("HAPPY: howto prints result message", {
-  Sys.setenv("OPENAI_KEY" = "fake-key")
-  Sys.setenv("OPENAI_MODEL" = "fake-model")
   vcr::use_cassette("howto-happy-print-results", {
     happy_results <- \() {
       with_stubbed_credentials({
