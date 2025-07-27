@@ -1,8 +1,8 @@
-# air 0.2.3
+# air (development version)
 
 # air 0.2.3
 
-This patch fixes a potential issue with how warnings from `keyring` are handled.
+This patch fixes a potential issue with how warnings from `keyring` are handled. Also, it updates the `vcr` package to the latest version and refreshes fixtures.
 
 # air 0.2.2
 

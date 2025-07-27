@@ -1,7 +1,7 @@
 Package: air
 Type: Package
 Title: AI Assistant to Write and Understand R Code
-Version: 0.2.3
+Version: 0.2.3.9000
 Authors@R: c(
     person("Davis", "Vaughan", , "davis@posit.co", role = c("aut", "cre")),
     person("Soumya", "Ray", , "soumya.ray@gmail.com", role = c("aut"))
